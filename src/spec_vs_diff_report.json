@@ -1,0 +1,61 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-09T10:17:24.253Z",
+  "summary": "REQ-7 is partially implemented via a new backend method `bootstrap_admin_role`, but key acceptance criteria (checking that no admin exists, enforcing caller is a permitted `#user`, and upgrade-persistent “admin already exists” state) are not evidenced in the diff. REQ-8 is implemented as a banner CTA with confirmation and navigation, but the mechanism to detect “no admin exists” appears incorrect (it uses `isCallerAdmin()` as a proxy) and the UI introduces an unrequested token-based flow.",
+  "missing_requirements": [
+    {
+      "id": "REQ-7",
+      "requirement": "Reject/trap if an Admin already exists (only the first caller can claim initial admin).",
+      "reason": "The new method calls `AccessControl.initialize(...)`, but the diff does not show any explicit check/trap when an admin already exists, so this requirement is not evidenced as implemented.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Reject/trap if the caller is not an authenticated user (i.e., not permitted as a #user).",
+      "reason": "`bootstrap_admin_role` only checks `caller.isAnonymous()`; there is no check that the caller is permitted as `#user` (e.g., `AccessControl.hasPermission(..., #user)`) before allowing bootstrap.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Persist the “admin already exists” state across canister upgrades (add migration logic only if required).",
+      "reason": "The diff does not show any stable variable/state persistence or upgrade hooks for the bootstrap/admin-initialized flag, nor a migration file. Persistence across upgrades is therefore not evidenced.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "requirement": "Show the claim-admin call-to-action only when the backend indicates no Admin exists yet.",
+      "reason": "The frontend ‘admin exists’ check uses `actor.isCallerAdmin()` as a proxy for whether *any* admin exists. This will return `false` for non-admin callers even when an admin exists, causing the banner to appear when it should not.",
+      "evidence": [
+        "frontend/src/hooks/useAdminBootstrap.ts",
+        "frontend/src/components/admin/InitializeAdminAccessBanner.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Token-based admin bootstrap requiring the user to enter an `adminToken` and `userProvidedToken`, including a token entry form and token-specific error handling.",
+      "reason": "REQ-7/REQ-8 describe a one-time ‘first authenticated user claims admin’ flow. They do not require or mention any token-based bootstrap or collecting tokens in the UI.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useAdminBootstrap.ts",
+        "frontend/src/components/admin/InitializeAdminAccessBanner.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/components/admin/InitializeAdminAccessBanner.tsx",
+    "frontend/src/components/layout/AppLayout.tsx",
+    "frontend/src/hooks/useAdminBootstrap.ts",
+    "project_state.json"
+  ]
+}

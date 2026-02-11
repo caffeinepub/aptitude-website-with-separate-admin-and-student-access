@@ -1,0 +1,26 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-frontend-ui-flow-that-allows-an-authenticated-user-to-become-the-initial-admin-when-and-only-when-no-admin-has-been-initialized-yet",
+      "featureTitle": "Add a frontend UI flow that allows an authenticated user to become the initial Admin when (and only when) no Admin has been initialized yet.",
+      "files": [
+        "frontend/src/components/admin/InitializeAdminAccessBanner.tsx",
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/hooks/useAdminBootstrap.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

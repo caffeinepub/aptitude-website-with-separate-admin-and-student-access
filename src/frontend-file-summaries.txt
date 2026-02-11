@@ -1,0 +1,21 @@
+{
+  "frontend/src/App.tsx": "Main application component with TanStack Router setup, role-based routing for admin/student areas, and authentication-aware navigation with profile setup integration using a properly named RootComponent.",
+  "frontend/src/hooks/useAuth.ts": "Authentication facade hook that wraps Internet Identity provider, exposes authentication state, login/logout functions, and clears React Query cache on logout.",
+  "frontend/src/hooks/useCallerRole.ts": "React Query hook that fetches the current user's role from the backend and provides convenient boolean flags (isAdmin, isStudent, isGuest) for role-based UI rendering.",
+  "frontend/src/hooks/useQueries.ts": "Centralized React Query hooks for all backend operations including user profiles, questions CRUD, quiz submissions, and results retrieval with proper cache invalidation.",
+  "frontend/src/components/auth/LoginButton.tsx": "Reusable authentication button component that handles sign-in/sign-out with loading states and error handling.",
+  "frontend/src/components/auth/ProfileSetupDialog.tsx": "Modal dialog that prompts new users to enter their name on first login, preventing flash by checking actor readiness and profile fetch status.",
+  "frontend/src/components/layout/AppLayout.tsx": "Main authenticated layout wrapper that renders the admin initialization banner above the navigation header and outlet for nested routes.",
+  "frontend/src/components/layout/RoleNavigation.tsx": "Header navigation component that conditionally displays admin or student menu items based on user role, with user profile dropdown and logout functionality.",
+  "frontend/src/pages/Landing.tsx": "Unauthenticated landing page with hero section explaining admin and student access, featuring login button and platform benefits.",
+  "frontend/src/pages/AccessDenied.tsx": "Access denied page shown when users attempt to access routes they don't have permission for, with navigation back to their appropriate dashboard.",
+  "frontend/src/pages/admin/AdminDashboard.tsx": "Admin dashboard displaying question bank statistics, topic counts, and quick action cards for question management with role guard protection.",
+  "frontend/src/pages/admin/QuestionManagement.tsx": "Admin-only page for CRUD operations on aptitude questions with table view, edit/delete actions, and confirmation dialogs.",
+  "frontend/src/components/admin/QuestionFormDialog.tsx": "Reusable dialog form for creating and editing questions with dynamic option management, correct answer selection, and validation.",
+  "frontend/src/pages/student/StudentDashboard.tsx": "Student dashboard showing available questions, best score, attempt statistics, and navigation to quiz and results pages with role guard protection.",
+  "frontend/src/pages/student/TakeQuiz.tsx": "Interactive quiz-taking page where students answer questions, submit answers, and view detailed results with correct/incorrect indicators and score breakdown, with Tailwind v3 compliant classes.",
+  "frontend/src/pages/student/MyResults.tsx": "Student results history page displaying all quiz submissions with scores, percentages, and performance statistics.",
+  "frontend/src/index.css": "Global styles with OKLCH-based teal/green color system for light and dark modes, avoiding blue/purple palette per design requirements.",
+  "frontend/src/hooks/useAdminBootstrap.ts": "React Query hooks for checking if an admin exists in the system and claiming initial admin access with token-based authentication, including proper cache invalidation on success.",
+  "frontend/src/components/admin/InitializeAdminAccessBanner.tsx": "Banner component that appears for authenticated non-admin users when no admin exists, providing a token-based form to claim initial admin access with confirmation dialog, error handling, and automatic navigation to admin dashboard on success."
+}

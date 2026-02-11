@@ -1,0 +1,71 @@
+{
+  "kind": "build_request",
+  "title": "Bootstrap initial Admin role assignment (make the current user an Admin)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-7",
+      "text": "Add a secure backend bootstrap mechanism to assign the initial Admin role to the first user who claims it, so the app can be initialized after deployment.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Me as a admin for that website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes a shared method (e.g., claimInitialAdmin) that assigns the caller as Admin only if no Admin has been set yet.",
+        "The method rejects/traps if an Admin already exists, preventing subsequent callers from becoming the initial Admin via this bootstrap path.",
+        "The method rejects/traps if the caller is not an authenticated user (i.e., not permitted as a #user).",
+        "After a successful claim, getCallerUserRole() returns 'admin' for that principal and existing admin-only methods (e.g., addQuestion, updateQuestion, deleteQuestion) are callable by that principal.",
+        "The chosen 'admin already exists' state is persisted across canister upgrades (add migration logic only if required by the existing stable state layout)."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add a frontend UI flow that allows an authenticated user to become the initial Admin when (and only when) no Admin has been initialized yet.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Me as a admin for that website"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When the user is authenticated and the backend indicates no Admin exists, the UI shows a clear call-to-action (English text) to claim Admin access (e.g., “Initialize Admin Access”).",
+        "Clicking the call-to-action prompts the user to confirm (to prevent accidental clicks) and then calls the backend bootstrap method.",
+        "On success, the frontend invalidates/refetches the caller role query and redirects the user to the Admin Dashboard route (/admin).",
+        "If the claim fails because an Admin already exists, show an English error message explaining that initialization is already complete and do not change the user’s role.",
+        "If the claim fails for any other reason, show a non-technical English error message and allow retry."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain single-actor with all Motoko logic in backend/main.mo; only add backend/migration.mo if a stable-state upgrade requires it.",
+    "Do not edit files under frontend/src/components/ui or any frontend immutable paths listed in SYSTEM_CONTEXT; compose existing components instead.",
+    "Use English for all user-facing UI text added/changed for this request."
+  ],
+  "nonGoals": [
+    "Implementing a general admin management UI (e.g., inviting/promoting/demoting other users) beyond the one-time bootstrap of the first Admin.",
+    "Adding third-party authentication providers (only Internet Identity is supported).",
+    "Adding real-time features (WebSockets, push notifications, chat)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

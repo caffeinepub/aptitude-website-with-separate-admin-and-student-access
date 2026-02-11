@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Build an aptitude website with separate access for admins and students.",
+  "architectural_notes": [
+    "Initial deployment/admin bootstrap: set the current authenticated user (the requester) as the initial Admin principal for the website."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-authentication-using-internet-identity-and-provide-a-clear-sign-in-sign-out-ux-for-the-aptitude-website",
+      "title": "Implement authentication using Internet Identity and provide a clear sign-in/sign-out UX for the aptitude website.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-role-based-access-control-with-two-roles-admin-and-student-store-and-enforce-roles-in-the-motoko-backend-so-that-admin-only-actions-cannot-be-performed-by-students",
+      "title": "Add role-based access control with two roles: Admin and Student. Store and enforce roles in the Motoko backend so that Admin-only actions cannot be performed by Students.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-separate-application-areas-routes-pages-for-admin-and-student-access-including-an-admin-dashboard-and-a-student-dashboard-with-navigation-that-only-shows-links-relevant-to-the-signed-in-user-s-role",
+      "title": "Create separate application areas (routes/pages) for Admin and Student access, including an Admin Dashboard and a Student Dashboard, with navigation that only shows links relevant to the signed-in user’s role.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-a-minimal-aptitude-test-domain-model-to-support-the-website-purpose-admin-can-create-edit-delete-aptitude-questions-students-can-list-questions-and-take-a-basic-quiz-attempt-with-scoring",
+      "title": "Define a minimal aptitude-test domain model to support the website purpose: Admin can create/edit/delete aptitude questions; Students can list questions and take a basic quiz attempt with scoring.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-visual-theme-and-layout-across-the-app-landing-dashboards-forms-tables-using-tailwind-shadcn-components-with-a-distinct-style-appropriate-for-an-aptitude-education-site-avoid-blue-purple-as-the-primary-palette",
+      "title": "Apply a coherent visual theme and layout across the app (landing, dashboards, forms, tables) using Tailwind + shadcn components, with a distinct style appropriate for an aptitude/education site (avoid blue & purple as the primary palette).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-frontend-ui-flow-that-allows-an-authenticated-user-to-become-the-initial-admin-when-and-only-when-no-admin-has-been-initialized-yet",
+      "title": "Add a frontend UI flow that allows an authenticated user to become the initial Admin when (and only when) no Admin has been initialized yet.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Implement role-based access with separate admin and student logins/permissions for the aptitude website",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Provide an Admin role bootstrap flow so the app can be initialized: on first deploy, allow a secure mechanism to set the initial Admin principal (e.g., first authenticated user becomes Admin, or a single explicit backend initializer method).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Add a secure backend bootstrap mechanism to assign the initial Admin role to the first user who claims it, so the app can be initialized after deployment.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Aptitude website with separate Admin and Student access",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

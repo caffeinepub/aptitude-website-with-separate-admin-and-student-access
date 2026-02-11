@@ -1,2 +1,3 @@
-# aptitude-website-with-separate-admin-and-student-access
-Exported from Caffeine project: Aptitude website with separate Admin and Student access
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
